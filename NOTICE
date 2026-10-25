@@ -1,0 +1,36 @@
+oh-my-pele
+Copyright (c) 2026 tboydar
+Licensed under the MIT License. See LICENSE.
+
+This is not an official Obsidian project, and it is not affiliated with
+Obsidian or with the oh-my-mermaid authors.
+
+.omm directory format
+---------------------
+The on-disk format (a `.omm/` directory, one subdirectory per perspective,
+the field files description.md, diagram.mmd, context.md, constraint.md,
+concern.md, todo.md, and note.md, nested child directories, plus
+meta.yaml and config.yaml) follows the format published by oh-my-mermaid:
+
+  https://github.com/oh-my-mermaid/oh-my-mermaid
+  Copyright (c) 2025 oh-my-mermaid
+  Licensed under the MIT License.
+
+Files under fixtures/from-omm/ are excerpts of that project's own `.omm`
+example, copied so oh-my-pele can be tested against real documents. Those
+excerpts remain under the MIT License, copyright oh-my-mermaid.
+
+The pele-scan skill describes the same directory layout in original wording.
+It is not a copy of the oh-my-mermaid skill text.
+
+pele
+----
+Diagrams are rendered by the pele library, used as the published npm
+package (not by copying its source into this repository):
+
+  https://github.com/obsidianmd/pele
+  Copyright (c) 2026 kepano
+  Licensed under the MIT License.
+
+Pele's zoom-reset icon is "rotate-ccw" from Lucide (ISC License). That
+icon ships inside pele. oh-my-pele does not vendor Lucide source.

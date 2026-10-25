@@ -1,0 +1,1 @@
+- Preserve YAML comments in config.yaml. The current writer parses and stringifies, which drops comments.

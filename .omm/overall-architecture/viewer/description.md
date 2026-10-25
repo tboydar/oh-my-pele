@@ -1,0 +1,1 @@
+Plain HTML, no frontend framework. The live server in `src/server/serve.ts` serves the page, `GET /api/doc`, server-sent events, and `/vendor/pele.global.js` from the installed pele package. The page script mounts the current diagram and drills into a child when its id matches a folder.

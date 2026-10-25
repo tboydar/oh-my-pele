@@ -1,0 +1,4 @@
+- Node.js 22 or newer.
+- `.omm/` field names stay compatible with oh-my-mermaid: description.md, diagram.mmd, context.md, constraint.md, concern.md, todo.md, note.md, plus nested folders, meta.yaml, and config.yaml.
+- Rendering is synchronous and local. The viewer serves pele from node_modules. The export inlines that same browser build.
+- Paths written through the CLI reject `..`, absolute paths, and hidden segments.

@@ -1,0 +1,3 @@
+- Show a diff against meta.yaml `prev_diagram`.
+- Teach the viewer to drill sequence and class diagrams, not only flowcharts.
+- Add a GitHub Action that runs `validate` on pull requests.

@@ -1,0 +1,19 @@
+graph TD
+  perspective["Perspective folder"]
+  description["description.md"]
+  diagram["diagram.mmd"]
+  context["context.md"]
+  constraint["constraint.md"]
+  concern["concern.md"]
+  todo["todo.md"]
+  note["note.md"]
+  child["Child folder"]
+
+  perspective -->|"what it is"| description
+  perspective -->|"Mermaid source"| diagram
+  perspective -->|"why it exists"| context
+  perspective -->|"rules"| constraint
+  perspective -->|"risks"| concern
+  perspective -->|"follow-ups"| todo
+  perspective -->|"asides"| note
+  perspective -->|"nested diagram"| child

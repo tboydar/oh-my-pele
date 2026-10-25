@@ -1,0 +1,1 @@
+The skill agents actually run. It requires the three perspectives, recursive drill-down when a module has internal structure, and constraint, concern, and todo on every perspective and on every element that has its own diagram. It tells the agent to run `validate` and fix pele's line numbers.

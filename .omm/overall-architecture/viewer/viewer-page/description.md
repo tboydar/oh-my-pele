@@ -1,0 +1,1 @@
+`viewerHtml` assembles CSS, a tiny boot script, the pele bundle, and `src/viewer/client.js`. The client renders the tree, breadcrumb, diagram, child chips, and the seven fields. Hash routes (`#/overall-architecture/viewer`) work for the live server and for a file opened from disk.

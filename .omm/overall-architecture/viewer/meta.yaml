@@ -1,0 +1,13 @@
+created: 2026-10-25T05:07:45.518Z
+updated: 2026-10-25T05:07:45.548Z
+update_count: 6
+last_field: todo
+kind: nested-class
+title: viewer
+parentPath: []
+git_commit: 2a76122
+git_branch: cursor/oh-my-pele-mvp-b859
+children:
+  - file-watch
+  - http-server
+  - viewer-page

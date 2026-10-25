@@ -1,0 +1,1 @@
+[pele](https://github.com/obsidianmd/pele) by kepano, MIT. A small synchronous Mermaid-to-SVG renderer with `render()`, `mount()`, and `--pele-*` CSS variables. oh-my-pele depends on the npm package and does not vendor its source.

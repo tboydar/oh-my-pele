@@ -1,0 +1,20 @@
+graph LR
+  setup-command["setup"]
+  view-command["view"]
+  validate-command["validate"]
+  export-command["export"]
+  read-write["read / write"]
+
+  setup-command -->|"copies SKILL.md"| skill-files["Skill directories"]
+  view-command -->|"HTTP and SSE"| local-browser["Local browser"]
+  validate-command -->|"pele.parse"| pele["pele"]
+  export-command -->|"pele.render"| static-html["index.html and SVG"]
+  read-write -->|"field files"| omm-dir[".omm directory"]
+
+  classDef external fill:#585b70,stroke:#585b70,color:#cdd6f4
+  classDef entry fill:#89b4fa,stroke:#89b4fa,color:#1e1e2e
+  classDef store fill:#a6e3a1,stroke:#a6e3a1,color:#1e1e2e
+
+  class setup-command,view-command entry
+  class omm-dir store
+  class pele external

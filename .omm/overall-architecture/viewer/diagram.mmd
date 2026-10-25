@@ -1,0 +1,19 @@
+graph LR
+  http-server["HTTP server\nsrc/server/serve.ts"]
+  viewer-page["Viewer page\nsrc/viewer/page.ts"]
+  file-watch["File watch\nSSE /events"]
+  vendor-pele["Vendored pele\n/vendor/pele.global.js"]
+
+  http-server -->|"GET /"| viewer-page
+  http-server -->|"GET /vendor"| vendor-pele
+  http-server -->|"pushes reload"| file-watch
+  viewer-page -->|"pele.mount"| vendor-pele
+  file-watch -->|"fs.watch .omm"| omm-dir[".omm directory"]
+
+  classDef external fill:#585b70,stroke:#585b70,color:#cdd6f4
+  classDef entry fill:#89b4fa,stroke:#89b4fa,color:#1e1e2e
+  classDef store fill:#a6e3a1,stroke:#a6e3a1,color:#1e1e2e
+
+  class http-server entry
+  class omm-dir store
+  class vendor-pele external

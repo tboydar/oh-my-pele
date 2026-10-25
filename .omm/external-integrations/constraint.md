@@ -1,0 +1,3 @@
+- No telemetry and no default network calls during validate, view, or export.
+- Setup only copies a Markdown file into skill directories. It does not log in to an editor marketplace.
+- Upstream licenses stay attached: pele MIT (kepano), oh-my-mermaid MIT for the directory format, Lucide ISC only as it already ships inside pele.

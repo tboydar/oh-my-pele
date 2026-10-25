@@ -1,0 +1,1 @@
+- Offer a dark SVG variant. The HTML page already switches theme after load. The standalone SVG files are light.

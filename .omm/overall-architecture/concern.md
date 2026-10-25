@@ -1,0 +1,3 @@
+- Pele's flowchart lexer is stricter than Mermaid's about node ids that begin with keywords such as `class`. `oh-my-pele validate` reports the line, but an agent can still emit a diagram that only fails here.
+- Click-to-drill only marks flowchart nodes (`.pele-node`). Other diagram types still open from the tree and the chips.
+- The single-file export inlines the pele browser build, so index.html is about 700KB before the document.

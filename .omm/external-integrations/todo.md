@@ -1,0 +1,2 @@
+- Re-check Codex and Claude skill paths when those tools publish a newer layout.
+- Add OpenClaw or Antigravity only if their skill directories are as stable as these three.

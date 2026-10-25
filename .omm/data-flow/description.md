@@ -1,0 +1,1 @@
+What moves when an agent scans a repo. Source code stays where it is. The agent writes Markdown and Mermaid into `.omm/`. pele turns diagram text into SVG on this machine for the viewer and for the export. There is no account and no upload step.

@@ -1,0 +1,1 @@
+Citty commands in `src/cli.ts` and `src/commands.ts`. `setup`, `view`, `validate`, and `export` are the MVP. `init`, `read`, `write`, `tree`, and `config` keep the directory easy to edit without opening files by hand.

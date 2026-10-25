@@ -1,0 +1,1 @@
+How the oh-my-pele package is split. A coding agent writes `.omm/` through the CLI or by hand. The same files are parsed by the validator, mounted in the local viewer, and rendered again for the static export. pele stays a library call. Nothing in this picture is uploaded.

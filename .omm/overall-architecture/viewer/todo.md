@@ -1,0 +1,1 @@
+- Remember the open element across reloads when the file that changed is a different branch of the tree. Today the hash is kept, which already does most of this.
