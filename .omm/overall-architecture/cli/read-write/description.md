@@ -1,0 +1,1 @@
+`read` prints one field. `write` replaces one field and updates meta.yaml: timestamps, update_count, last_field, kind, title, parentPath, children, git commit, and prev_diagram when a diagram changes.

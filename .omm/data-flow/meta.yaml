@@ -1,0 +1,16 @@
+created: 2026-10-25T05:07:45.606Z
+updated: 2026-10-25T05:07:45.644Z
+update_count: 7
+last_field: note
+kind: perspective
+title: data-flow
+git_commit: 2a76122
+git_branch: cursor/oh-my-pele-mvp-b859
+children:
+  - agent
+  - codebase
+  - export-bundle
+  - omm-dir
+  - pele
+  - skill
+  - viewer

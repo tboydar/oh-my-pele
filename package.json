@@ -1,0 +1,68 @@
+{
+  "name": "oh-my-pele",
+  "version": "0.1.0",
+  "description": "Local, offline architecture diagrams for coding agents. Reads and writes the .omm format, rendered with pele.",
+  "type": "module",
+  "bin": {
+    "oh-my-pele": "./dist/cli.js",
+    "omp": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "skills/",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "README.zh-TW.md"
+  ],
+  "homepage": "https://github.com/tboydar/oh-my-pele",
+  "bugs": {
+    "url": "https://github.com/tboydar/oh-my-pele/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tboydar/oh-my-pele.git"
+  },
+  "keywords": [
+    "mermaid",
+    "pele",
+    "architecture",
+    "diagram",
+    "offline",
+    "claude-code",
+    "codex",
+    "cursor",
+    "oh-my-mermaid"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run build && npm test"
+  },
+  "author": "tboydar",
+  "license": "MIT",
+  "dependencies": {
+    "citty": "^0.1.6",
+    "pele": "^1.10.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsup": "^9.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

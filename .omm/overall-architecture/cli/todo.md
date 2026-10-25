@@ -1,0 +1,1 @@
+- Accept a diagram on stdin for `validate` so an agent can check one snippet before saving it.

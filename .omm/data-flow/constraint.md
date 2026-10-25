@@ -1,0 +1,3 @@
+- Diagram text is the source of truth. SVG is an output.
+- Field prose follows `config.yaml` `language`. Node ids stay English kebab-case.
+- `validate` must pass before `export` will write files.

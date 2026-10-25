@@ -1,0 +1,1 @@
+TypeScript library and CLI, built with tsup, tested with vitest, and aimed at Node 22 or newer. The published package name is `oh-my-pele`. `omp` is an alias for the same binary. Runtime dependencies are citty (the command parser), yaml (config and meta files), and pele (diagrams).

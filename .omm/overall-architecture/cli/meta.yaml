@@ -1,0 +1,15 @@
+created: 2026-10-25T05:07:45.402Z
+updated: 2026-10-25T05:07:45.433Z
+update_count: 6
+last_field: todo
+kind: nested-class
+title: cli
+parentPath: []
+git_commit: 2a76122
+git_branch: cursor/oh-my-pele-mvp-b859
+children:
+  - export-command
+  - read-write
+  - setup-command
+  - validate-command
+  - view-command

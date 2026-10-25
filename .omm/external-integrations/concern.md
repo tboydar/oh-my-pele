@@ -1,0 +1,1 @@
+Skill directory conventions move. Codex has used both `~/.agents/skills` and `~/.codex/skills`. This MVP installs the project skill at `.agents/skills/pele-scan` and the home skill at `~/.codex/skills/pele-scan`. A newer Codex build may look somewhere else until the paths are updated.

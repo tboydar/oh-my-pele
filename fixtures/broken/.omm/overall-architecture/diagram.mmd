@@ -1,0 +1,4 @@
+graph LR
+  reader["Reader"] -->|"loads"| store["Store"]
+  C[Unclosed --> D[End]
+  store -->|"writes"| disk["Disk"]

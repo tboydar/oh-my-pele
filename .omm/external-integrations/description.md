@@ -1,0 +1,1 @@
+Everything this repo deliberately talks to. pele is a local library. The three coding agents only receive a SKILL.md on disk. GitHub Pages is an output format, not a deploy step this CLI performs. There is no cloud diagram host.

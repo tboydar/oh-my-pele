@@ -1,0 +1,1 @@
+Copies `skills/pele-scan/SKILL.md` into the project skill folders for Claude Code (`.claude/skills`), Codex (`.agents/skills`), and Cursor (`.cursor/skills`). `--global-only` uses the home directory instead, including `~/.codex/skills` for Codex.

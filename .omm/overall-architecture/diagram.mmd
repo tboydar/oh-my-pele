@@ -1,0 +1,31 @@
+graph LR
+  cli["CLI\nsrc/cli.ts"]
+  store["Store\nsrc/lib/store.ts"]
+  validator["Validator\nsrc/lib/validate.ts"]
+  viewer["Viewer\nsrc/server/serve.ts"]
+  exporter["Exporter\nsrc/lib/export-site.ts"]
+  skill-setup["Skill setup\nsrc/lib/platforms.ts"]
+  pele-scan["pele-scan\nskills/pele-scan/SKILL.md"]
+  pele["pele\nnpm package"]
+
+  cli -->|"dispatches commands"| store
+  cli -->|"dispatches commands"| validator
+  cli -->|"starts"| viewer
+  cli -->|"writes a site"| exporter
+  cli -->|"installs the skill"| skill-setup
+  skill-setup -->|"copies SKILL.md"| pele-scan
+  pele-scan -->|"tells the agent to write"| store
+  validator -->|"parse()"| pele
+  viewer -->|"mount()"| pele
+  exporter -->|"render()"| pele
+  viewer -->|"reads the tree"| store
+  exporter -->|"reads the tree"| store
+  validator -->|"reads diagrams"| store
+
+  classDef external fill:#585b70,stroke:#585b70,color:#cdd6f4
+  classDef entry fill:#89b4fa,stroke:#89b4fa,color:#1e1e2e
+  classDef store fill:#a6e3a1,stroke:#a6e3a1,color:#1e1e2e
+
+  class cli,pele-scan entry
+  class store store
+  class pele external

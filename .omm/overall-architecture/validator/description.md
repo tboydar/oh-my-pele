@@ -1,0 +1,1 @@
+`src/lib/validate.ts` calls `pele.parse` on every non-empty diagram. Syntax, semantic, unsupported-diagram, and limit failures become errors with pele's line and column. Empty diagrams, groups without a diagram, child folders missing from the drawing, and edges with no label are warnings.

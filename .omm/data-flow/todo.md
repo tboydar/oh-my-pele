@@ -1,0 +1,2 @@
+- Surface `prev_diagram` in the side panel.
+- Let `export` include a plain-text copy of each field next to its SVG for diffs that ignore HTML.

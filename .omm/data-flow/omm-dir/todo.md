@@ -1,0 +1,1 @@
+- Document a merge story for `prev_diagram` when oh-my-mermaid and oh-my-pele both write one tree.

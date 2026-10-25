@@ -1,0 +1,24 @@
+graph LR
+  codebase["Codebase\nsource tree"]
+  agent["Coding agent\nClaude, Codex, Cursor"]
+  skill["pele-scan\nskills/pele-scan/SKILL.md"]
+  omm-dir[".omm directory\nperspectives and fields"]
+  pele["pele\nlocal renderer"]
+  viewer["Local viewer\noh-my-pele view"]
+  export-bundle["Static export\nindex.html and SVG"]
+
+  codebase -->|"read by the agent"| agent
+  agent -->|"follows"| skill
+  skill -->|"writes field files"| omm-dir
+  omm-dir -->|"diagram.mmd"| pele
+  pele -->|"SVG"| viewer
+  pele -->|"SVG"| export-bundle
+  omm-dir -->|"file watch"| viewer
+
+  classDef external fill:#585b70,stroke:#585b70,color:#cdd6f4
+  classDef entry fill:#89b4fa,stroke:#89b4fa,color:#1e1e2e
+  classDef store fill:#a6e3a1,stroke:#a6e3a1,color:#1e1e2e
+
+  class agent,pele external
+  class skill entry
+  class omm-dir store

@@ -1,0 +1,19 @@
+graph LR
+  oh-my-pele["oh-my-pele\nthis package"]
+  pele["pele\nnpm, MIT, offline"]
+  claude-code["Claude Code\n.claude/skills"]
+  codex["Codex\n.agents/skills"]
+  cursor["Cursor\n.cursor/skills"]
+  github-pages["GitHub Pages\nstatic HTML"]
+
+  oh-my-pele -->|"render and mount, no upload"| pele
+  oh-my-pele -->|"installs /pele-scan"| claude-code
+  oh-my-pele -->|"installs /pele-scan"| codex
+  oh-my-pele -->|"installs /pele-scan"| cursor
+  oh-my-pele -->|"writes a file you can host"| github-pages
+
+  classDef external fill:#585b70,stroke:#585b70,color:#cdd6f4
+  classDef entry fill:#89b4fa,stroke:#89b4fa,color:#1e1e2e
+
+  class pele,claude-code,codex,cursor,github-pages external
+  class oh-my-pele entry
