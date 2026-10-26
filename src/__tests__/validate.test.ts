@@ -26,6 +26,20 @@ describe('validate', () => {
     expect(flow.errors).toBe(0);
   });
 
+  it('explains the rejected id and suggests a rename an agent can apply', () => {
+    const report = validateDocument(loadDocument(path.join(fixtures, 'from-omm')));
+    const issue = report.issues.find((entry) => entry.rule === 'pele-syntax' && entry.path === 'command-surface');
+    expect(issue).toMatchObject({ level: 'error', line: 22 });
+    expect(issue?.column).toBeGreaterThan(0);
+    expect(issue?.message).toContain('"class-field"');
+    expect(issue?.message).toContain('"class" keyword');
+    expect(issue?.message).toContain('Rename the id to "class_field"');
+    const text = formatReport(report);
+    expect(text).toContain('command-surface');
+    expect(text).toContain('line 22, column');
+    expect(text).toContain('class_field');
+  });
+
   it('parses the mini fixture and warns when a child folder is missing from the diagram', () => {
     const report = validateDocument(loadDocument(path.join(fixtures, 'mini')));
     expect(report.errors).toBe(0);

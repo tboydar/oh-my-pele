@@ -100,7 +100,7 @@ graph LR
   store -->|"reads and writes"| omm-dir[".omm directory"]
 ```
 
-- The node id (`cli`, `omm-dir`) is the child directory name when that node has its own folder. Kebab-case. Do not put spaces in ids. Do not start an id with a Mermaid keyword such as `class`, `style`, `click`, or `subgraph` (`class-field` is read as the `class` statement). Use `field-handler` instead.
+- The node id (`cli`, `omm-dir`) is the child directory name when that node has its own folder. Kebab-case. Do not put spaces in ids. Do not start an id with a Mermaid keyword such as `class`, `style`, `click`, `subgraph`, or `end` (`class-field` is read as the `class` statement, `end-node` as the block-closing `end`). Use `field-handler` instead. `validate` reports the offending id, line, and column when a diagram does this.
 - The label is two lines when you know the path: display name, then `\n`, then the file or directory.
 - Every edge has a label: `A -->|"what crosses this edge"| B`.
 - Keep a diagram to about 5–12 nodes. If you need more, push the detail into a child diagram.

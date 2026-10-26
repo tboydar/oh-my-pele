@@ -72,7 +72,7 @@ oh-my-pele export --out pele-site
 | `setup [claude\|codex\|cursor]` | 安裝或移除 `/pele-scan` |
 | `view [--port N] [--host H] [--open]` | 本機檢視器。存檔後頁面會重新載入 |
 | `validate [path] [--json]` | 用 pele 解析圖 |
-| `export [--out dir]` | 產出 `index.html` 與 `svg/*.svg` |
+| `export [--out dir] [--theme light\|dark\|auto]` | 產出 `index.html` 與 `svg/*.svg` |
 | `init` | 建立空的 `.omm/` |
 | `tree [path]` | 印出元素樹 |
 | `config [key]` | 印出 `config.yaml`。`config language` 預設是 `en` |
@@ -109,7 +109,7 @@ oh-my-pele export --out pele-site
 
 子目錄就是子圖，資料夾名稱就是 Mermaid 節點 id。檢視器依照這些 id 在 `diagram.mmd` 裡出現的位置排列子項目，並把可以點開的流程圖節點標出來。側欄顯示七個欄位裡實際有寫的內容。`meta.yaml` 保留 oh-my-mermaid 會寫的鍵（`created`、`updated`、`update_count`、`last_field`、`kind`、`title`、`children`、`parentPath`，以及圖被改寫時的 `prev_diagram`）。其他鍵，包括 `cloud:` 區塊，會原樣留下。這個工具不會把它們推送到任何地方。
 
-`fixtures/from-omm/` 是 oh-my-mermaid 自己的 `.omm` 範例的節錄，測試會用到它。其中 `command-surface` 這張圖的節點 id 是 `class-field`。pele 的詞法分析器會把開頭的 `class` 看成 class 關鍵字，因此 `validate` 會回報第 22 行。這份節錄裡的其他圖可以正常解析。
+`fixtures/from-omm/` 是 oh-my-mermaid 自己的 `.omm` 範例的節錄，測試會用到它。其中 `command-surface` 這張圖的節點 id 是 `class-field`。pele 的詞法分析器會把開頭的 `class` 看成 class 關鍵字，因此 `validate` 會回報第 22 行，並指出是哪個 id、建議改成什麼（`class_field`）。這份節錄裡的其他圖可以正常解析。
 
 ## 示範
 
@@ -187,7 +187,7 @@ oh-my-pele view
 
 ## 主題
 
-檢視器與匯出的 HTML 會跟著頁面主題走。單獨的 SVG 以淺色盤繪製（`--pele-accent: #c2410c`，以及其餘的淺色變數）。顏色來自 CSS 變數，不來自遠端主題服務。
+檢視器與匯出的 HTML 會跟著頁面主題走。單獨的 SVG 可用 `export --theme` 選擇色盤：`light`（預設）、`dark`、或 `auto`。`auto` 會在 SVG 內嵌 `prefers-color-scheme` 樣式表，同一份檔案在淺色與深色頁面上都能看。顏色來自 CSS 變數，不來自遠端主題服務。
 
 ## 開發
 

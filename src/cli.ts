@@ -101,9 +101,13 @@ const exportCmd = defineCommand({
   args: {
     dir: dirArg,
     out: { type: 'string', description: 'Output directory (default pele-site)' },
+    theme: {
+      type: 'string',
+      description: 'Palette for the standalone SVGs: light, dark, or auto (default light)',
+    },
   },
   run({ args }) {
-    exitWith(runExport(args.out, { dir: args.dir }));
+    exitWith(runExport(args.out, { dir: args.dir, theme: args.theme }));
   },
 });
 

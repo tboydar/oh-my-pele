@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { stringify as stringifyYaml } from 'yaml';
-import { exportSite, ExportError } from './lib/export-site.js';
+import { exportSite, ExportError, type SvgTheme } from './lib/export-site.js';
 import {
   commandOnPath,
   installSkills,
@@ -144,10 +144,14 @@ export function runValidate(slashPath?: string, json = false, options: CommonOpt
   }
 }
 
-export function runExport(outDir?: string, options: CommonOptions = {}): number {
+export function runExport(
+  outDir?: string,
+  options: CommonOptions & { theme?: string } = {},
+): number {
   try {
+    const theme = parseSvgTheme(options.theme);
     const doc = loadDocument(projectDir(options));
-    const result = exportSite(doc, outDir || path.join(projectDir(options), 'pele-site'));
+    const result = exportSite(doc, outDir || path.join(projectDir(options), 'pele-site'), { theme });
     process.stdout.write(`Exported ${result.htmlFile}\n`);
     process.stdout.write(`${result.svgFiles.length} SVG file${result.svgFiles.length === 1 ? '' : 's'} in ${path.join(result.outDir, 'svg')}\n`);
     if (result.warnings.length > 0) {
@@ -237,6 +241,12 @@ export function runSetup(options: SetupCliOptions = {}): number {
   } catch (error) {
     return fail(error);
   }
+}
+
+function parseSvgTheme(value: string | undefined): SvgTheme | undefined {
+  if (value === undefined) return undefined;
+  if (value === 'light' || value === 'dark' || value === 'auto') return value;
+  throw new Error(`error: invalid theme '${value}'. Valid: light, dark, auto`);
 }
 
 function mustFind(doc: ReturnType<typeof loadDocument>, slashPath: string): OmmNode {
