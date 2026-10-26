@@ -33,7 +33,7 @@ export {
 
 export { formatReport, validateDocument } from './lib/validate.js';
 export { ExportError, exportSite, peleGlobalPath } from './lib/export-site.js';
-export type { ExportResult } from './lib/export-site.js';
+export type { ExportResult, SvgTheme } from './lib/export-site.js';
 export {
   PLATFORMS,
   commandOnPath,

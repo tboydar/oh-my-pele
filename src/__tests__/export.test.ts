@@ -35,6 +35,30 @@ describe('export', () => {
     expect(fs.existsSync(path.join(out, 'manifest.json'))).toBe(true);
   });
 
+  it('renders standalone SVGs in dark and auto themes', () => {
+    const doc = loadDocument(path.join(fixtures, 'mini'));
+
+    const darkOut = fs.mkdtempSync(path.join(os.tmpdir(), 'oh-my-pele-export-dark-'));
+    const dark = exportSite(doc, darkOut, { theme: 'dark' });
+    const darkSvg = fs.readFileSync(dark.svgFiles[0]!, 'utf8');
+    expect(darkSvg).toContain('--pele-accent:#ff7a45');
+    expect(darkSvg).not.toContain('prefers-color-scheme');
+
+    const autoOut = fs.mkdtempSync(path.join(os.tmpdir(), 'oh-my-pele-export-auto-'));
+    const auto = exportSite(doc, autoOut, { theme: 'auto' });
+    const autoSvg = fs.readFileSync(auto.svgFiles[0]!, 'utf8');
+    expect(autoSvg).toContain('prefers-color-scheme: dark');
+    expect(autoSvg).toContain('--pele-accent: #c2410c');
+    expect(autoSvg).toContain('--pele-accent: #ff7a45');
+    expect(autoSvg).not.toContain('--pele-accent:#c2410c');
+  });
+
+  it('includes the reserved-id hint when a keyword-prefixed id blocks export', () => {
+    const doc = loadDocument(path.join(fixtures, 'from-omm'));
+    const out = fs.mkdtempSync(path.join(os.tmpdir(), 'oh-my-pele-export-hint-'));
+    expect(() => exportSite(doc, out)).toThrow(/Rename the id to "class_field"/);
+  });
+
   it('refuses to export a diagram pele cannot parse', () => {
     const doc = loadDocument(path.join(fixtures, 'broken'));
     const out = fs.mkdtempSync(path.join(os.tmpdir(), 'oh-my-pele-export-bad-'));

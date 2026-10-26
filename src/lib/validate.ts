@@ -5,6 +5,7 @@ import {
   type ValidationIssue,
   type ValidationReport,
 } from '../types.js';
+import { reservedIdHint } from './pele-ids.js';
 import { findByPath, walk } from './store.js';
 
 export function validateDocument(doc: OmmDocument, slashPath?: string): ValidationReport {
@@ -44,7 +45,7 @@ export function validateDocument(doc: OmmDocument, slashPath?: string): Validati
       const model = parse(diagram);
       issues.push(...structuralIssues(node, diagram, model));
     } catch (error) {
-      issues.push(peleIssue(node.path, error));
+      issues.push(peleIssue(node.path, diagram, error));
     }
   });
 
@@ -99,15 +100,16 @@ function selectRoots(doc: OmmDocument, slashPath?: string): OmmNode[] {
   return [node];
 }
 
-function peleIssue(elementPath: string, error: unknown): ValidationIssue {
+function peleIssue(elementPath: string, diagram: string, error: unknown): ValidationIssue {
   if (error instanceof PeleError) {
+    const hint = reservedIdHint(diagram, error);
     return {
       level: 'error',
       rule: `pele-${error.code}`,
       path: elementPath,
       line: error.line || undefined,
       column: error.column || undefined,
-      message: error.message,
+      message: hint ? `${error.message}\n${hint}` : error.message,
     };
   }
   const message = error instanceof Error ? error.message : String(error);

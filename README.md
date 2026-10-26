@@ -72,7 +72,7 @@ oh-my-pele export --out pele-site
 | `setup [claude\|codex\|cursor]` | Install or remove `/pele-scan` |
 | `view [--port N] [--host H] [--open]` | Local viewer. File saves reload the page |
 | `validate [path] [--json]` | Parse diagrams with pele |
-| `export [--out dir]` | `index.html` plus `svg/*.svg` |
+| `export [--out dir] [--theme light\|dark\|auto]` | `index.html` plus `svg/*.svg` |
 | `init` | Create an empty `.omm/` |
 | `tree [path]` | Print the element tree |
 | `config [key]` | Print `config.yaml`. `config language` defaults to `en` |
@@ -109,7 +109,7 @@ The directory layout matches oh-my-mermaid, so an existing `.omm/` folder can be
 
 A subdirectory is a child diagram. Its folder name is the Mermaid node id. The viewer orders children by where those ids appear in `diagram.mmd`, and it highlights flowchart nodes you can open. The side panel shows whichever of the seven fields exist. `meta.yaml` keeps the keys oh-my-mermaid writes (`created`, `updated`, `update_count`, `last_field`, `kind`, `title`, `children`, `parentPath`, and `prev_diagram` when a diagram is replaced). Extra keys, including a `cloud:` block, are left in place. This tool never pushes them anywhere.
 
-`fixtures/from-omm/` is a shortened copy of oh-my-mermaid's own `.omm` example, used by the tests. One of those diagrams (`command-surface`) uses the node id `class-field`. Pele's lexer treats a leading `class` as the class keyword, so `validate` reports line 22. The other diagrams in that excerpt parse.
+`fixtures/from-omm/` is a shortened copy of oh-my-mermaid's own `.omm` example, used by the tests. One of those diagrams (`command-surface`) uses the node id `class-field`. Pele's lexer treats a leading `class` as the class keyword, so `validate` reports line 22 with the offending id and a suggested rename (`class_field`). The other diagrams in that excerpt parse.
 
 ## Demo
 
@@ -187,7 +187,7 @@ The page has a tree, the diagram, chips for child diagrams, and a side panel. Li
 
 ## Themes
 
-The viewer and the exported HTML follow the page theme. Standalone SVGs are rendered with the light palette (`--pele-accent: #c2410c` and the rest of the light set). Colors come from CSS variables, not from a hosted theme.
+The viewer and the exported HTML follow the page theme. Standalone SVGs take a `--theme` flag on `export`: `light` (default), `dark`, or `auto`. `auto` embeds a `prefers-color-scheme` stylesheet, so one SVG file works on light and dark pages. Colors come from CSS variables, not from a hosted theme.
 
 ## Development
 

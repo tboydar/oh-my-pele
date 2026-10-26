@@ -4,9 +4,17 @@ import { createRequire } from 'node:module';
 import { render, PeleError } from 'pele';
 import type { OmmDocument, OmmNode, ValidationIssue } from '../types.js';
 import { toClientDoc } from '../types.js';
+import { reservedIdHint } from './pele-ids.js';
 import { validateDocument, formatReport } from './validate.js';
 import { viewerHtml } from '../viewer/page.js';
-import { declarations, LIGHT_PELE } from '../viewer/theme.js';
+import { declarations, themeBlock, LIGHT_PELE, DARK_PELE } from '../viewer/theme.js';
+
+/** Palette used for the standalone SVGs. `auto` follows the viewer's scheme. */
+export type SvgTheme = 'light' | 'dark' | 'auto';
+
+export interface ExportOptions {
+  theme?: SvgTheme;
+}
 
 export interface ExportResult {
   outDir: string;
@@ -25,7 +33,8 @@ export class ExportError extends Error {
   }
 }
 
-export function exportSite(doc: OmmDocument, outDir: string): ExportResult {
+export function exportSite(doc: OmmDocument, outDir: string, options: ExportOptions = {}): ExportResult {
+  const theme: SvgTheme = options.theme ?? 'light';
   const report = validateDocument(doc);
   if (!report.ok) {
     throw new ExportError(formatReport(report));
@@ -46,11 +55,11 @@ export function exportSite(doc: OmmDocument, outDir: string): ExportResult {
       const drawn = render(diagram);
       const fileName = `${svgFileStem(node.path)}.svg`;
       const filePath = path.join(svgDir, fileName);
-      fs.writeFileSync(filePath, svgDocument(drawn.svg), 'utf8');
+      fs.writeFileSync(filePath, svgDocument(drawn.svg, theme), 'utf8');
       svgFiles.push(filePath);
       manifest.push({ path: node.path, file: `svg/${fileName}` });
     } catch (error) {
-      renderIssues.push(renderIssue(node.path, error));
+      renderIssues.push(renderIssue(node.path, diagram, error));
     }
     node.children.forEach(visit);
   };
@@ -90,9 +99,28 @@ export function peleGlobalPath(): string {
   return path.join(path.dirname(pkgJson), 'dist', 'pele.global.js');
 }
 
-function svgDocument(svg: string): string {
-  const themed = injectTheme(svg, declarations(LIGHT_PELE));
-  return `<?xml version="1.0" encoding="UTF-8"?>\n${themed}\n`;
+function svgDocument(svg: string, theme: SvgTheme): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n${themedSvg(svg, theme)}\n`;
+}
+
+function themedSvg(svg: string, theme: SvgTheme): string {
+  if (theme === 'auto') {
+    // No inline palette: a <style> block sets the light palette and flips to
+    // the dark one under prefers-color-scheme, so the file adapts wherever it
+    // is opened. The inline --_bg:var(--pele-bg,…) mapping pele emits keeps
+    // working because --pele-* resolve from the stylesheet.
+    const style = [
+      '<style>',
+      themeBlock('.pele', LIGHT_PELE),
+      '@media (prefers-color-scheme: dark) {',
+      indentBlock(themeBlock('.pele', DARK_PELE), 2),
+      '}',
+      '</style>',
+    ].join('\n');
+    return svg.replace(/^(<svg\b[^>]*>)/, `$1\n${style}`);
+  }
+  const palette = theme === 'dark' ? DARK_PELE : LIGHT_PELE;
+  return injectTheme(svg, declarations(palette));
 }
 
 function injectTheme(svg: string, decls: string): string {
@@ -102,20 +130,29 @@ function injectTheme(svg: string, decls: string): string {
   return svg.replace('<svg', `<svg style="${decls}"`);
 }
 
+function indentBlock(block: string, spaces: number): string {
+  const pad = ' '.repeat(spaces);
+  return block
+    .split('\n')
+    .map((line) => (line ? `${pad}${line}` : line))
+    .join('\n');
+}
+
 function svgFileStem(elementPath: string): string {
   const stem = elementPath.replace(/[^A-Za-z0-9/_-]+/g, '-').replace(/\//g, '--');
   return stem || 'diagram';
 }
 
-function renderIssue(elementPath: string, error: unknown): ValidationIssue {
+function renderIssue(elementPath: string, diagram: string, error: unknown): ValidationIssue {
   if (error instanceof PeleError) {
+    const hint = reservedIdHint(diagram, error);
     return {
       level: 'error',
       rule: `pele-${error.code}`,
       path: elementPath,
       line: error.line || undefined,
       column: error.column || undefined,
-      message: error.message,
+      message: hint ? `${error.message}\n${hint}` : error.message,
     };
   }
   return {
